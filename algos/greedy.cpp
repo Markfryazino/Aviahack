@@ -10,6 +10,11 @@ using namespace std;
 
 vector<int> used;
 
+struct HandledPlane {
+    int x1_, y1_, x2_, y2_;
+    std::string name_;
+};
+
 bool planecmp(Airplane a, Airplane b) {
     return  (a.height_ > b.height_) ||
             (a.height_ == b.height_ && a.width_ > b.width_);
@@ -23,7 +28,7 @@ void SortOrders(ParamSet& params) {
              return a.min_number_ > b.min_number_ ||
                     (a.min_number_ == b.min_number_ && a.time_ > b.time_);
          });
-
+    used.clear();
     used.resize(params.orders_.size());
 }
 
@@ -35,21 +40,21 @@ vector<Order> HandleOrders(ParamSet& params, Hangar& hangar, int required=0) {
         int best_price = 0, id = 0, best_id = -1;
         Order best_order = {};
         for (auto order : params.orders_) {
-            if (!used[id] && best_price < order.cost_[hangar.name_]) {
+            if (used[id] < order.min_number_ && best_price < order.cost_[hangar.name_]) {
                 best_id = id;
                 best_price = order.cost_[hangar.name_];
             }
             ++id;
         }
         if (best_id > -1) {
-            used[best_id] = 1;
+            ++used[best_id];
             subset.push_back(best_order);
         }
     }
     return subset;
 }
 
-void Greedy(ParamSet& params, Hangar& hangar) {
+bool Greedy(ParamSet& params, Hangar& hangar)   {
     vector<Order> orders = HandleOrders(params, hangar, 2);
     vector<Airplane> planes;
     // unpacking orders
@@ -66,6 +71,7 @@ void Greedy(ParamSet& params, Hangar& hangar) {
     double last_x = 0, last_y = 0, cur_x = 0, cur_y = 0;
 
     vector<bool> taken(planes.size());
+
     bool any_taken = false;
     int moved = 0;
     while (moved < 2) {
@@ -90,8 +96,13 @@ void Greedy(ParamSet& params, Hangar& hangar) {
 
 }
 
+void VeryMain(ParamSet& params) {
+    SortOrders(params);
+
+}
 
 int main() {
-    cout << "Ha-ha hackathons go brr";
+//    cout << "Ha-ha hackathons go brr";
+
     return 0;
 }
