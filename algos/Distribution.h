@@ -19,7 +19,7 @@ struct HandledOrder {
     Order order_;
     int taken_number_;
     // Для каждого самолета, который мы берем чинить, содержит вектор с разными его расположениями.
-    // Двумерность нужна для того, чтобы перемещать самолеты внутри ангара.
+    // (координаты, время) Двумерность нужна для того, чтобы перемещать самолеты внутри ангара.
     std::vector<std::vector<std::pair<Coords, int>>> planes_;
 };
 
@@ -33,6 +33,8 @@ public:
     double score_;
     ParamSet params_;
     std::vector<HandledOrder> orders_;
+
+    std::pair<double, std::string> evaluate();
 };
 
 
