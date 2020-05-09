@@ -13,12 +13,12 @@
 #endif //FLY_BABE_TIMETOINT_H
 
 
-std::string Format(std::string s) {
+std::string Format(std::string s, char sep='.') {
     std::string t;
     std::string p;
     for (auto c : s) {
-        if (c == '/') {
-            t += (p.size() > 1 ? "" : "0") + p + "/";
+        if (c == sep) {
+            t += (p.size() > 1 ? "" : "0") + p + ".";
             p = "";
         } else {
             p += c;
@@ -27,7 +27,7 @@ std::string Format(std::string s) {
     t += p;
 
     assert(t.size() == 10);
-    assert(t[2] == '/' && t[5] == '/');
+    assert(t[2] == sep && t[5] == sep);
 
     return t;
 }
@@ -36,11 +36,11 @@ long StrToInt(std::string s) {
     struct tm _tm;
     s = Format(s);
 
-    assert(s[0] == '0' && isdigit(s[1]) || s[0] == '1' && s[1] <= '2');
-    assert(s[3] <= '2' && isdigit(s[4]) || s[3] == '3' && s[4] <= '1');
+    assert(s[3] == '0' && isdigit(s[4]) || s[3] == '1' && s[4] <= '2');
+    assert(s[0] <= '2' && isdigit(s[1]) || s[0] == '3' && s[1] <= '1');
 
     std::istringstream ss(s);
-    ss >> std::get_time(&_tm, "%m/%d/%Y");
+    ss >> std::get_time(&_tm, "%d.%m.%Y");
     _tm.tm_sec = 0;
     _tm.tm_min = 0;
     _tm.tm_hour = 0;
@@ -49,5 +49,5 @@ long StrToInt(std::string s) {
 
     assert(t > 0);
 
-    return t;
+    return t / 86400 - 18261;
 }
