@@ -24,12 +24,13 @@ struct Hangar {
     double width_, height_;
     // сколько стоит выполнение того или иного ТО на том или ином самолете.
     // -1, если не выполняется.
-    std::map<std::pair<std::string, std::string>, double> costs;
+    std::map<std::pair<std::string, std::string>, double> costs_;
 };
 
 struct Order {
     std::string company_, airplane_, type_;
     int number_, time_, min_number_;
+    std::map<std::string, double> cost_;
 };
 
 #endif //ALGOS_STRUCTS_H
