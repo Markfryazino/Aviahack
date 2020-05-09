@@ -3,4 +3,4 @@ project(algos)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(algos main.cpp)
+add_executable(algos main.cpp greedy.cpp)

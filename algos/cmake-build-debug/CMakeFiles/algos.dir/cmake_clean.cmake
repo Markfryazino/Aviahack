@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/algos.dir/greedy.cpp.o"
   "CMakeFiles/algos.dir/main.cpp.o"
   "algos"
   "algos.pdb"

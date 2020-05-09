@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/algos.dir/main.cpp.o  -o algos 
+/usr/bin/c++  -g   CMakeFiles/algos.dir/main.cpp.o CMakeFiles/algos.dir/greedy.cpp.o  -o algos 
