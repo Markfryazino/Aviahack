@@ -8,7 +8,7 @@
 #include <map>
 #include <fstream>
 
-INF = 1e9;
+int INF = 1e9;
 
 std::pair<double, std::string> Distribution::evaluate() {
     double cost = 0;
@@ -36,7 +36,7 @@ std::pair<double, std::string> Distribution::evaluate() {
 
         for (auto &plane : order.planes_) {
             std::string hangar_name = plane[0].first.hangar_;
-            double day_cost = this->params_.get_hangar(hangar_name)->costs_[{type, name}];
+            double day_cost = this->params_.get_hangar(hangar_name)->costs_[{type, hangar_name}];
             cost += day_cost * order.order_.time_;
         }
     }
@@ -45,5 +45,5 @@ std::pair<double, std::string> Distribution::evaluate() {
         if (p.second.first * 0.7 > p.second.second)
             return {-INF, "Недостаточно заказов для " + p.first};
 
-    return cost;
+    return {cost, "OK"};
 }

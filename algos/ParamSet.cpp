@@ -5,19 +5,20 @@
 #include <vector>
 #include "ParamSet.h"
 #include "TimeToInt.h"
+#include <iostream>
 
 ParamSet::ParamSet(std::string path) {
     std::ifstream fin_hangar(path + "hangars.txt");
     std::string name;
-    int width, int height;
+    int width, height;
     while (fin_hangar >> name >> width >> height) {
-        this->hangars_.push_back({name, width, height});
+        this->hangars_.push_back({name, static_cast<double>(width), static_cast<double>(height)});
         this->hangar_to_id_[name] = this->hangars_.size() - 1;
     }
 
     std::ifstream fin_planes(path + "airplanes.txt");
-    while (fin_planes >> name >> widht >> height) {
-        this->planes_.push_back({name, width, height});
+    while (fin_planes >> name >> width >> height) {
+        this->planes_.push_back({name, static_cast<double>(width), static_cast<double>(height)});
         this->plane_to_id_[name] = this->planes_.size() - 1;
     }
 
@@ -41,7 +42,7 @@ ParamSet::ParamSet(std::string path) {
 
     std::ifstream fin_orders(path + "orders.txt");
     std::string comp_name;
-    int number, time, min;
+    double number, time, min;
     while (fin_orders >> comp_name >> plane_name >> type_name >> number >> time >> min) {
         std::map<std::string, double> costs;
         for (auto& hangar : this->hangars_) {
@@ -50,6 +51,7 @@ ParamSet::ParamSet(std::string path) {
                 costs[hangar.name_] = -1;
             else costs[hangar.name_] = time * cost;
         }
-        this->orders_.push_back({comp_name, plane_name, type_name, number, time, min, costs});
+        this->orders_.push_back({comp_name, plane_name, type_name,
+                                 static_cast<int>(number), static_cast<int>(time), static_cast<int>(min), costs});
     }
 }
