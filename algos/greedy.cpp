@@ -123,7 +123,11 @@ void VeryMain(ParamSet& params) {
 }
 
 int main() {
+<<<<<<< HEAD
     ParamSet params(PATH);
+=======
+    ParamSet params("data/");
+>>>>>>> 36b017bd3be9cc4abe1093f2b4fc9e0910867954
 //    cout << "Ha-ha hackathons go brr";
     VeryMain(params);
     return 0;

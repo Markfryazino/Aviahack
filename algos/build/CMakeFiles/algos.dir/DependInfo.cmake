@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/data_sapiens/programs/projects/aviahack/algos/greedy.cpp" "/home/data_sapiens/programs/projects/aviahack/algos/cmake-build-debug/CMakeFiles/algos.dir/greedy.cpp.o"
-  "/home/data_sapiens/programs/projects/aviahack/algos/main.cpp" "/home/data_sapiens/programs/projects/aviahack/algos/cmake-build-debug/CMakeFiles/algos.dir/main.cpp.o"
+  "/home/data_sapiens/programs/projects/aviahack/algos/greedy.cpp" "/home/data_sapiens/programs/projects/aviahack/algos/build/CMakeFiles/algos.dir/greedy.cpp.o"
+  "/home/data_sapiens/programs/projects/aviahack/algos/main.cpp" "/home/data_sapiens/programs/projects/aviahack/algos/build/CMakeFiles/algos.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
