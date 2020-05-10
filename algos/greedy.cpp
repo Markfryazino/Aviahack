@@ -119,15 +119,17 @@ void VeryMain(ParamSet& params) {
     // и затем делаем FormPackingQuery и вызов решения.
     // Формируем файл в адекватном виде и направляем на упаковку.
     vector<pair<Order, int>> other = FormOtherQuery(orders);
+    for (auto& hangar : params.hangars_) {
+        vector<pair<Order, int>> sorted_orders = SortForHangar(
+                other, hangar, (int)(should_take[hangar.name_] * start_size));
+        FormPackingQuery(sorted_orders, hangar, params);
+        Packing(hangar);
+    }
     other = UnpackOrders(other);
 }
 
 int main() {
-<<<<<<< HEAD
     ParamSet params(PATH);
-=======
-    ParamSet params("data/");
->>>>>>> 36b017bd3be9cc4abe1093f2b4fc9e0910867954
 //    cout << "Ha-ha hackathons go brr";
     VeryMain(params);
     return 0;
