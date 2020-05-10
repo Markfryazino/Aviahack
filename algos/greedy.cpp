@@ -72,7 +72,7 @@ vector<pair<Order, int>> UnpackOrders(vector<pair<Order, int>>& orders) {
 void FormPackingQuery(vector<pair<Order, int>>& orders, Hangar& hangar, ParamSet& params) {
     ofstream out;
     out.open(PATH + hangar.name_ + "_in.txt");
-    out << orders.size() << " " << hangar.height_ << " " << hangar.width_  << " " << 90 << '\n';
+    out << orders.size() << " " << hangar.height_ << " " << hangar.width_  << " " << 390 << '\n';
     for (auto& order : orders) {
         Airplane* current = params.get_plane(order.first.airplane_);
         out << current->height_ << " " << current->width_ << " "
@@ -109,23 +109,23 @@ void VeryMain(ParamSet& params) {
                                                  {"SVO", 0.343},
                                                  {"VKO", 0.2}};
     int start_size = essential.size();
-    for (auto& hangar : params.hangars_) {
-        vector<pair<Order, int>> sorted_orders = SortForHangar(
-                essential, hangar, (int)(should_take[hangar.name_] * start_size));
-        FormPackingQuery(sorted_orders, hangar, params);
-        Packing(hangar);
-    }
+//    for (auto& hangar : params.hangars_) {
+//        vector<pair<Order, int>> sorted_orders = SortForHangar(
+//                essential, hangar, (int)(should_take[hangar.name_] * start_size));
+//        FormPackingQuery(sorted_orders, hangar, params);
+//        Packing(hangar);
+//    }
     // Для каждого ангара вызываем SortForHangar, где should_take - пропорциональная часть объема,
     // и затем делаем FormPackingQuery и вызов решения.
     // Формируем файл в адекватном виде и направляем на упаковку.
     vector<pair<Order, int>> other = FormOtherQuery(orders);
+    other = UnpackOrders(other);
     for (auto& hangar : params.hangars_) {
         vector<pair<Order, int>> sorted_orders = SortForHangar(
                 other, hangar, (int)(should_take[hangar.name_] * start_size));
         FormPackingQuery(sorted_orders, hangar, params);
         Packing(hangar);
     }
-    other = UnpackOrders(other);
 }
 
 int main() {
