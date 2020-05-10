@@ -17,7 +17,7 @@ struct Coords {
 
 struct HandledOrder {
     Order order_;
-    int taken_number_;
+    int taken_number_ = 0;
     // Для каждого самолета, который мы берем чинить, содержит вектор с разными его расположениями.
     // (координаты, время) Двумерность нужна для того, чтобы перемещать самолеты внутри ангара.
     std::vector<std::vector<std::pair<Coords, int>>> planes_;
@@ -36,7 +36,8 @@ public:
 
     std::pair<double, std::string> evaluate();
 
-
+    Distribution build();
+    Distribution(ParamSet &set);
 };
 
 

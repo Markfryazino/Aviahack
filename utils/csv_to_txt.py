@@ -12,7 +12,7 @@ def handle_num(x):
 def handle_num_2(x):
     return float(x.replace(',', '.'))
 
-path = '../data/'
+path = './data/'
 files = ['hangars', 'orders', 'companies', 'airplanes', 'types']
 
 data = pd.read_csv(path + files[0] + '.csv')

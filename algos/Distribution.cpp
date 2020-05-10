@@ -47,3 +47,25 @@ std::pair<double, std::string> Distribution::evaluate() {
 
     return {cost, "OK"};
 }
+
+    Distribution::Distribution(ParamSet &set) {
+        this->params_ = set;
+        for (auto &order : set.orders_)
+            this->orders_.push_back({order});
+    }
+
+    Distribution Distribution::build(ParamSet &set) {
+        std::vector<std::string> hangars = {"DME", "SVO", "VKO"};
+        Distribution dist(set);
+        for (auto &hangar : hangars) {
+            std::ifstream in("data/" + hangar + "_out.txt");
+            int n;
+            in >> n;
+            for (int i = 0; i < n; ++i) {
+                int idx, x, y, t;
+                in >> idx >> x >> y >> t;
+                dist.orders_[idx].taken_number_++;
+                dist.orders_[idx].planes_.push_back({{hangar, x, y}, t});
+            }
+        }
+    }

@@ -1,0 +1,3 @@
+/home/data_sapiens/programs/projects/aviahack/algos/build/CMakeFiles/rebuild_cache.dir
+/home/data_sapiens/programs/projects/aviahack/algos/build/CMakeFiles/edit_cache.dir
+/home/data_sapiens/programs/projects/aviahack/algos/build/CMakeFiles/algos.dir

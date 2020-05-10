@@ -139,7 +139,6 @@ vector<Order> Input() {
 int main() {
     ParamSet params("data/");
 //    cout << "Ha-ha hackathons go brr";
-    Distribution dist;
     VeryMain(params);
     return 0;
 }
