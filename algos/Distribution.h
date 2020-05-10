@@ -35,6 +35,8 @@ public:
     std::vector<HandledOrder> orders_;
 
     std::pair<double, std::string> evaluate();
+
+
 };
 
 

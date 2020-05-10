@@ -1,4 +1,4 @@
-# Install script for directory: /home/ivan/Prog/Cpp/Aviahack/algos
+# Install script for directory: /home/data_sapiens/programs/projects/aviahack/algos
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ivan/Prog/Cpp/Aviahack/algos/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/data_sapiens/programs/projects/aviahack/algos/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
