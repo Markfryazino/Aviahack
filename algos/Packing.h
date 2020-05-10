@@ -1,8 +1,13 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <unordered_set>
 #include <fstream>
+#include "ParamSet.h"
+#include "structs.h"
+#include "Distribution.h"
 using namespace std;
 
 struct plane {
@@ -60,9 +65,9 @@ bool cmp8(plane a, plane b) {
 
 vector<vector<hangar>> container;
 
-void output(vector<vector<hangar>>& ans, int cur_cont) {
+void output(vector<vector<hangar>>& ans, int cur_cont, Hangar& hang) {
     ofstream out;
-    out.open("output.txt");
+    out.open(hang.name_ + "_out.txt");
     out << cur_cont << '\n';
     for (int i = 0; i < cur_cont; ++i) {
         out << ans[i].size() << '\n';
@@ -93,8 +98,8 @@ int solve(vector<plane>& boxes, int n, double l, double w, double time) {
                 if (!used[boxes[i].idx] && boxes[i].width_ <= cur_w &&
                     boxes[i].height_ <= cur_l && boxes[i].time_ <= cur_time) {
                     container[cur_cont].push_back({
-                        boxes[i].idx, l - cur_l, w - cur_w, time - cur_time,
-                        boxes[i].height_, boxes[i].width_, boxes[i].time_
+                                                          boxes[i].idx, l - cur_l, w - cur_w, time - cur_time,
+                                                          boxes[i].height_, boxes[i].width_, boxes[i].time_
                                                   });
                     cur_w -= boxes[i].width_;
                     max_cur_l = min(-boxes[i].height_ + cur_l, max_cur_l);
@@ -117,6 +122,7 @@ int solve(vector<plane>& boxes, int n, double l, double w, double time) {
             }
         }
         ++cur_cont;
+        break;
         if (!flag1) {
             break;
         }
@@ -124,10 +130,10 @@ int solve(vector<plane>& boxes, int n, double l, double w, double time) {
     return cur_cont;
 }
 
-int main() {
+int Packing(Hangar& hang) {
     int n, l, w, time;
     ifstream in;
-    in.open("08.in");
+    in.open(hang.name_ + "_in.txt");
     in >> n >> l >> w >> time;
     vector<plane> boxes(n);
     for (int i = 0; i < n; ++i) {
@@ -160,6 +166,6 @@ int main() {
             ans = container;
         }
     }
-    output(ans, best_score - 1);
+    output(ans, best_score - 1, hang);
     return 0;
 }

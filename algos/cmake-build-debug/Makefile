@@ -123,33 +123,6 @@ algos/fast:
 	$(MAKE) -f CMakeFiles/algos.dir/build.make CMakeFiles/algos.dir/build
 .PHONY : algos/fast
 
-Packing.o: Packing.cpp.o
-
-.PHONY : Packing.o
-
-# target to build an object file
-Packing.cpp.o:
-	$(MAKE) -f CMakeFiles/algos.dir/build.make CMakeFiles/algos.dir/Packing.cpp.o
-.PHONY : Packing.cpp.o
-
-Packing.i: Packing.cpp.i
-
-.PHONY : Packing.i
-
-# target to preprocess a source file
-Packing.cpp.i:
-	$(MAKE) -f CMakeFiles/algos.dir/build.make CMakeFiles/algos.dir/Packing.cpp.i
-.PHONY : Packing.cpp.i
-
-Packing.s: Packing.cpp.s
-
-.PHONY : Packing.s
-
-# target to generate assembly for a file
-Packing.cpp.s:
-	$(MAKE) -f CMakeFiles/algos.dir/build.make CMakeFiles/algos.dir/Packing.cpp.s
-.PHONY : Packing.cpp.s
-
 greedy.o: greedy.cpp.o
 
 .PHONY : greedy.o
@@ -213,9 +186,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... algos"
 	@echo "... edit_cache"
-	@echo "... Packing.o"
-	@echo "... Packing.i"
-	@echo "... Packing.s"
 	@echo "... greedy.o"
 	@echo "... greedy.i"
 	@echo "... greedy.s"

@@ -84,7 +84,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/ivan/Prog/Cpp/Aviahack/algos/Packing.cpp">
+		<Unit filename="/home/ivan/Prog/Cpp/Aviahack/algos/Packing.h">
 			<Option target="algos"/>
 		</Unit>
 		<Unit filename="/home/ivan/Prog/Cpp/Aviahack/algos/greedy.cpp">

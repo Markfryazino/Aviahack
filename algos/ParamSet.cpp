@@ -16,9 +16,10 @@ ParamSet::ParamSet(std::string path) {
         this->hangar_to_id_[name] = this->hangars_.size() - 1;
     }
 
+    double width_d, height_d;
     std::ifstream fin_planes(path + "airplanes.txt");
-    while (fin_planes >> name >> width >> height) {
-        this->planes_.push_back({name, static_cast<double>(width), static_cast<double>(height)});
+    while (fin_planes >> name >> width_d >> height_d) {
+        this->planes_.push_back({name, width_d, height_d});
         this->plane_to_id_[name] = this->planes_.size() - 1;
     }
 

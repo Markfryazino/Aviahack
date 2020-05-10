@@ -7,11 +7,6 @@
 #include <string>
 
 
-#ifndef FLY_BABE_TIMETOINT_H
-#define FLY_BABE_TIMETOINT_H
-
-#endif //FLY_BABE_TIMETOINT_H
-
 
 std::string Format(std::string s, char sep='.') {
     std::string t;
