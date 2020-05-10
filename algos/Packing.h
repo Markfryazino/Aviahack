@@ -8,17 +8,19 @@
 #include "ParamSet.h"
 #include "structs.h"
 #include "Distribution.h"
+
 using namespace std;
+
+const string PATH = "/home/ivan/Prog/Cpp/Aviahack/data/";
 
 struct plane {
     double height_, width_;
-    int idx, time_;
+    int idx, time_, order_idx, ok_period_st, ok_period_end;
 };
 
 struct hangar {
-    int idx;
-    double x, y, z, a, b;
-    int c;
+    int idx, order_idx;
+    double x, y, z;
 };
 
 bool cmp0(plane a, plane b) {
@@ -67,19 +69,17 @@ vector<vector<hangar>> container;
 
 void output(vector<vector<hangar>>& ans, int cur_cont, Hangar& hang) {
     ofstream out;
-    out.open(hang.name_ + "_out.txt");
-    out << cur_cont << '\n';
+    out.open(PATH + hang.name_ + "_out.txt");
     for (int i = 0; i < cur_cont; ++i) {
         out << ans[i].size() << '\n';
         for (auto& el : ans[i]) {
-            out << el.idx << " " << el.x << " " << el.y << " " << el.z <<
-                " " << el.a << " " << el.b << " " << el.c << '\n';
+            out << el.order_idx << " " << el.x << " " << el.y << " " << el.z << '\n';
         }
     }
     out.close();
 }
 
-int solve(vector<plane>& boxes, int n, double l, double w, double time) {
+pair<int, int> solve(vector<plane>& boxes, int n, double l, double w, double time) {
     vector<bool> used(n);
     int cur_cont = 0;
     while (true) {
@@ -98,8 +98,8 @@ int solve(vector<plane>& boxes, int n, double l, double w, double time) {
                 if (!used[boxes[i].idx] && boxes[i].width_ <= cur_w &&
                     boxes[i].height_ <= cur_l && boxes[i].time_ <= cur_time) {
                     container[cur_cont].push_back({
-                                                          boxes[i].idx, l - cur_l, w - cur_w, time - cur_time,
-                                                          boxes[i].height_, boxes[i].width_, boxes[i].time_
+                        boxes[i].idx, boxes[i].order_idx,
+                        l - cur_l, w - cur_w, time - cur_time
                                                   });
                     cur_w -= boxes[i].width_;
                     max_cur_l = min(-boxes[i].height_ + cur_l, max_cur_l);
@@ -122,26 +122,25 @@ int solve(vector<plane>& boxes, int n, double l, double w, double time) {
             }
         }
         ++cur_cont;
-        break;
-        if (!flag1) {
+        if (!flag1 || cur_cont == 2) {
             break;
         }
     }
-    return cur_cont;
+    return {cur_cont, container[cur_cont - 1].size()};
 }
 
 int Packing(Hangar& hang) {
     int n, l, w, time;
     ifstream in;
-    in.open(hang.name_ + "_in.txt");
+    in.open(PATH + hang.name_ + "_in.txt");
     in >> n >> l >> w >> time;
     vector<plane> boxes(n);
     for (int i = 0; i < n; ++i) {
-        in >> boxes[i].height_ >> boxes[i].width_ >> boxes[i].time_;
+        in >> boxes[i].height_ >> boxes[i].width_ >> boxes[i].time_ >> boxes[i].order_idx;
         boxes[i].idx = i;
     }
     container.resize(n);
-    int best_score = solve(boxes, n, l, w, time);
+    pair<int, int> best_score = solve(boxes, n, l, w, time);
     typedef bool (*comparator) (plane, plane);
     vector<vector<hangar>> ans = container;
     vector<comparator> cmp = {cmp0, cmp1, cmp2, cmp3, cmp4,
@@ -151,21 +150,22 @@ int Packing(Hangar& hang) {
         for (auto& v : container) {
             v.clear();
         }
-        int score = solve(boxes, n, l, w, time);
-        if (score < best_score) {
+        pair<int, int> score = solve(boxes, n, l, w, time);
+        if (score.second > best_score.second) {
             best_score = score;
             ans = container;
         }
+        cout << score.second << '\n';
         sort(boxes.rbegin(), boxes.rend(), comp);
         for (auto& v : container) {
             v.clear();
         }
         score = solve(boxes, n, l, w, time);
-        if (score < best_score) {
+        if (score.second > best_score.second) {
             best_score = score;
             ans = container;
         }
     }
-    output(ans, best_score - 1, hang);
+    output(ans, best_score.first - 1, hang);
     return 0;
 }
