@@ -86,10 +86,10 @@ aircrafts = {
 
 t = 60
 
-orders = open('orders.txt', 'r', encoding='UTF-8').readlines()
+orders = open('data/orders.txt', 'r', encoding='UTF-8').readlines()
 print(orders[3])
 
-with open('DME_out.txt', 'r', encoding='UTF-8') as file:
+with open('data/DME_out.txt', 'r', encoding='UTF-8') as file:
     n = int(file.readline())
     for i in range(n):
         coordinates = file.readline().split()
@@ -114,7 +114,7 @@ with open('DME_out.txt', 'r', encoding='UTF-8') as file:
                 "img_%s = ImageTk.PhotoImage(pilImage)\n" \
                 "c.create_image(X1_DME + x * 2, Y1_DME + y * 2, anchor=NW, image=img_%d)" % (i, i))
 
-with open('SVO_out.txt', 'r', encoding='UTF-8') as file:
+with open('data/SVO_out.txt', 'r', encoding='UTF-8') as file:
     n = int(file.readline())
     for i in range(n):
         coordinates = file.readline().split()
@@ -140,7 +140,7 @@ with open('SVO_out.txt', 'r', encoding='UTF-8') as file:
                 "img_SVO%s = ImageTk.PhotoImage(pilImage)\n" \
                 "c.create_image(X1_SVO + x * 2, Y1_SVO + y * 2, anchor=NW, image=img_SVO%d)" % (i, i))
 
-with open('VKO_out.txt', 'r', encoding='UTF-8') as file:
+with open('data/VKO_out.txt', 'r', encoding='UTF-8') as file:
     n = int(file.readline())
     for i in range(n):
         coordinates = file.readline().split()

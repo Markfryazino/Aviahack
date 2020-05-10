@@ -84,7 +84,7 @@ void FormPackingQuery(vector<pair<Order, int>>& orders, Hangar& hangar, ParamSet
 vector<pair<Order, int>> SortForHangar(vector<pair<Order, int>>& orders, Hangar& hangar, int should_take) {
     vector<pair<Order, int>> sorted_orders;
     sort(orders.begin(), orders.end(), [hangar](pair<Order, int>& a, pair<Order, int>& b) {
-        return a.first.cost_[hangar.name_] < b.first.cost_[hangar.name_];
+        return a.first.cost_[hangar.name_] > b.first.cost_[hangar.name_];
     });
     // TODO Добавить сортировку по стоимости за м^3. Для этого надо сформировать локальный
     //  мап параметров самолетов и считать cost / (a.width_ * a.height_)

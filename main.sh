@@ -4,3 +4,5 @@ cd algos
 cmake -Bbuild -H.
 cmake --build build --target all
 ./build/algos
+cd ..
+python3 Tkinter.py
